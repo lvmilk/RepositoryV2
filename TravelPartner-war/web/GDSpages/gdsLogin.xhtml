@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Login</title>
+    </h:head>
+    <h:body>
+
+        <div style="width:50%; margin-right:15%;margin-top:10%; margin-bottom:auto;margin-left:auto; border:0px ;">
+            <h:form>
+
+                <p:panel id="panel" header="Air Alliance Login" style="width: 50%">
+
+                    <p:messages id="msgs" showDetail="true" />
+                    <h:panelGrid columns="3" cellpadding="10">
+                        <p:outputLabel for="username" value="Username:" />
+                        <p:inputText id="username" value="#{gdslogin.username}" required="true" label="Username" size="10">
+                            <f:validateLength minimum="2" />
+                        </p:inputText>
+                        <p:message for="username" display="icon" />
+
+                        <p:outputLabel for="password" value="Password:" />
+                        <p:inputText id="password" type="password" value="#{gdslogin.password}" label="Password" required="true" size="10">
+                            <f:validateLength minimum="2" />
+                            <p:ajax update="msgPassword" event="keyup" />
+                        </p:inputText>
+                        <p:message for="password" id="msgPassword" display="icon" />
+
+
+                    </h:panelGrid>
+                    <!--                    <p:captcha id="captcha" secure="true"></p:captcha>-->
+                    <p:commandButton value="Login" update='panel' ajax="false" actionListener="#{gdslogin.gdsLogin}" icon="ui-icon-check" />
+
+                </p:panel>
+            </h:form>
+
+        </div>
+
+    </h:body>
+</html>
+
