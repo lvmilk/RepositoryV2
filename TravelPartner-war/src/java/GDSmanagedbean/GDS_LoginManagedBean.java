@@ -7,6 +7,7 @@ package GDSmanagedbean;
 
 import java.io.IOException;
 import java.io.Serializable;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -81,6 +82,10 @@ public class GDS_LoginManagedBean implements Serializable {
         if (validity) {
             System.out.println("~~~~~~~GDS_Login: Account exists");
             FacesContext.getCurrentInstance().getExternalContext().redirect("gdsWorkspace.xhtml");
+        }else{
+                System.out.println("Username or password incorrect");
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage("Username or password incorrect"));
         }
     }
 
