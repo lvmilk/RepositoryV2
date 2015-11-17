@@ -7,11 +7,14 @@ package GDSmanagedbean;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.persistence.Temporal;
 import javax.xml.ws.WebServiceRef;
 import sessionbean.gds.AirAlliances;
+import sessionbean.gds.Exception_Exception;
 import sessionbean.gds.GDSLoginBean_Service;
 
 /**
@@ -26,27 +29,49 @@ public class GDS_FlightReleaseManagedBean implements Serializable {
     private GDSLoginBean_Service service;
 
     private String flightNo;
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date flightDate;
+
+    private Date flightDate = new Date();
+    private Date currentDate = new Date();
 
     private String flightStatus;
 
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date actualDepTime;
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date actualArrTime;
+    private Date depTime;
+    private Date arrTime;
 
     private String depAirport;
     private String arrAirport;
     private Integer bookedSeat;
     private Integer availableSeat;
     private Integer seatQuota;
+    private String companyName;
 
-    private AirAlliances retrieveAccInfo(java.lang.String gdsUserId, java.lang.String gdsPwd) {
+    private String username;
+
+    private String depIATA;
+    private String arrIATA;
+
+    @PostConstruct
+    public void init() {
+        try {
+            username = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("UserId");
+            AirAlliances al = new AirAlliances();
+            al = retrieveAccInfo(username);
+            System.out.println("************This is in GDS_FlightRelease:" + al.getName());
+            companyName = al.getName();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public void releaseFlight(){
+        System.out.println("********This is in release flight");
+    }
+
+    private AirAlliances retrieveAccInfo(java.lang.String gdsUserId) throws Exception_Exception {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
         sessionbean.gds.GDSLoginBean port = service.getGDSLoginBeanPort();
-        return port.retrieveAccInfo(gdsUserId, gdsPwd);
+        return port.retrieveAccInfo(gdsUserId);
     }
 
     /**
@@ -92,31 +117,31 @@ public class GDS_FlightReleaseManagedBean implements Serializable {
     }
 
     /**
-     * @return the actualDepTime
+     * @return the depTime
      */
-    public Date getActualDepTime() {
-        return actualDepTime;
+    public Date getDepTime() {
+        return depTime;
     }
 
     /**
-     * @param actualDepTime the actualDepTime to set
+     * @param depTime the depTime to set
      */
-    public void setActualDepTime(Date actualDepTime) {
-        this.actualDepTime = actualDepTime;
+    public void setDepTime(Date depTime) {
+        this.depTime = depTime;
     }
 
     /**
-     * @return the actualArrTime
+     * @return the arrTime
      */
-    public Date getActualArrTime() {
-        return actualArrTime;
+    public Date getArrTime() {
+        return arrTime;
     }
 
     /**
-     * @param actualArrTime the actualArrTime to set
+     * @param arrTime the arrTime to set
      */
-    public void setActualArrTime(Date actualArrTime) {
-        this.actualArrTime = actualArrTime;
+    public void setArrTime(Date arrTime) {
+        this.arrTime = arrTime;
     }
 
     /**
@@ -187,6 +212,76 @@ public class GDS_FlightReleaseManagedBean implements Serializable {
      */
     public void setSeatQuota(Integer seatQuota) {
         this.seatQuota = seatQuota;
+    }
+
+    /**
+     * @return the companyName
+     */
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    /**
+     * @param companyName the companyName to set
+     */
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    /**
+     * @return the username
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * @param username the username to set
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /**
+     * @return the currentDate
+     */
+    public Date getCurrentDate() {
+        return currentDate;
+    }
+
+    /**
+     * @param currentDate the currentDate to set
+     */
+    public void setCurrentDate(Date currentDate) {
+        this.currentDate = currentDate;
+    }
+
+    /**
+     * @return the depIATA
+     */
+    public String getDepIATA() {
+        return depIATA;
+    }
+
+    /**
+     * @param depIATA the depIATA to set
+     */
+    public void setDepIATA(String depIATA) {
+        this.depIATA = depIATA;
+    }
+
+    /**
+     * @return the arrIATA
+     */
+    public String getArrIATA() {
+        return arrIATA;
+    }
+
+    /**
+     * @param arrIATA the arrIATA to set
+     */
+    public void setArrIATA(String arrIATA) {
+        this.arrIATA = arrIATA;
     }
 
 }

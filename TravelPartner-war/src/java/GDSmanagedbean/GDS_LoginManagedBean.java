@@ -72,16 +72,22 @@ public class GDS_LoginManagedBean implements Serializable {
 
     public void gdsLogin()throws IOException  {
         Boolean validity;
+        String bkSystem="ARS";
 //        HttpSession session = SessionUtil.getSession();
 //        session.setAttribute("username", username);
 //        session.setAttribute("stfType", stfType);
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("UserId", username);
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("StaffType", stfType);
+//        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("UserId", username);
+//        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("StaffType", stfType);
         validity = login(username, password);
         System.out.println(validity);
         if (validity) {
             System.out.println("~~~~~~~GDS_Login: Account exists");
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("UserId", username);
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("StaffType", stfType);
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("bkSystem", bkSystem);
+            
             FacesContext.getCurrentInstance().getExternalContext().redirect("gdsWorkspace.xhtml");
+            
         }else{
                 System.out.println("Username or password incorrect");
                 FacesContext.getCurrentInstance().addMessage(null,

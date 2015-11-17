@@ -2,6 +2,8 @@
 
 <xs:import namespace="http://jaxb.dev.java.net/array" schemaLocation="http://localhost:8080/GDSLoginBean/GDSLoginBean?xsd=1"/>
 
+<xs:element name="Exception" type="tns:Exception"/>
+
 <xs:element name="login" type="tns:login"/>
 
 <xs:element name="loginResponse" type="tns:loginResponse"/>
@@ -13,7 +15,6 @@
 <xs:complexType name="retrieveAccInfo">
 <xs:sequence>
 <xs:element name="gdsUserId" type="xs:string" minOccurs="0"/>
-<xs:element name="gdsPwd" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -613,6 +614,12 @@
 <xs:element name="reservation" type="tns:reservation" minOccurs="0"/>
 <xs:element name="securityCode" type="xs:string" minOccurs="0"/>
 <xs:element name="totalPrice" type="xs:double" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Exception">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

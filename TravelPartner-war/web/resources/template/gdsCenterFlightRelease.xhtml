@@ -8,16 +8,52 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <h:form >
+        <h:form id="rlFlight" >
             <p:panel id="frPanel"  style="margin-bottom:20px">
+                <p:messages id="msgs" showDetail="false" />
                 <h:panelGrid  columns="2"   cellpadding="10">
                     <p:outputLabel  value="Airline Name: " />
-                    <p:inputText value="#{gdsFR.bookerId}" />
+                    <p:outputLabel value="#{gdsFR.companyName}" />
 
                     <p:outputLabel  value="Flight No. : " />
-                    <p:inputText value="#{gdsFR.flightNo}" >
-                        
+                    <p:inputText value="#{gdsFR.flightNo}" required="true" requiredMessage="Please enter a Flight No" />
+
+                    <h:outputLabel for="flightDate"  value="Flight Date:(YYYY-MM-DD)" />
+                    <p:calendar  id="flightDate"  value="#{gdsFR.flightDate}"  mindate="#{gdsFR.currentDate}" pattern="yyyy-MM-dd" mask="true"   validatorMessage="Date: Please enter a valid date in format yyyy-MM-dd"  size="20">   
+                    </p:calendar>    
+
+                    <p:outputLabel for="depTime" value="Departure Time (HH:mm in UTC+00:00): " />
+                    <p:calendar  id="depTime" value="#{gdsFR.depTime}" pattern="HH:mm" timeOnly="true" required="true" requiredMessage="Please enter flight departure time" size="30"/>
+
+                    <p:outputLabel for="arrTime" value="Arrival Time (HH:mm in UTC+00:00): " />
+                    <p:calendar  id="arrTime" value="#{gdsFR.arrTime}" pattern="HH:mm" timeOnly="true" required="true" requiredMessage="Please enter flight arrival time" size="30"/>
+
+                    <p:outputLabel for="depAirportName" value="Departure Airport : " />
+                    <p:inputText id="depAirportName" value="#{gdsFR.depAirport}" label="depAirportName" required="true" validatorMessage="Airport Name: please enter a valid airport name" requiredMessage="Please enter airport name" size="30" >
+                        <f:validateRegex pattern="((?=.*[a-zA-Z]).{1,50})" />
+                    </p:inputText>                   
+
+                    <p:outputLabel for="depIATA" value="Departure Airport IATA: " />
+                    <p:inputText id="depIATA" value="#{gdsFR.arrIATA}" label="IATA" required="true" requiredMessage="Please enter airport IATA" size="30">
                     </p:inputText>
+
+
+                    <p:outputLabel for="arrAirportName" value="Arrival Airport : " />
+                    <p:inputText id="arrAirportName" value="#{gdsFR.arrAirport}" label="arrAirportName" required="true" validatorMessage="Airport Name: please enter a valid airport name" requiredMessage="Please enter airport name" size="30" >
+                        <f:validateRegex pattern="((?=.*[a-zA-Z]).{1,50})" />
+                    </p:inputText>                   
+
+                    <p:outputLabel for="arrIATA" value="Arrival Airport IATA: " />
+                    <p:inputText id="arrIATA" value="#{gdsFR.depIATA}" label="IATA" required="true" requiredMessage="Please enter airport IATA" size="30">
+                    </p:inputText>
+                    
+                    <p:outputLabel  value="Quota : " />
+                    <p:inputText value="#{gdsFR.seatQuota}" required="true" requiredMessage="Please fill in the Quota" validatorMessage="Please enter at least 1">
+                        <f:validateLongRange minimum="1"/>
+                    </p:inputText>
+                    
+                    <p:commandButton update="rlFlight" value="Confirm" action="#{gdsFR.releaseFlight()}"  />
+                    
                 </h:panelGrid>
             </p:panel>
 

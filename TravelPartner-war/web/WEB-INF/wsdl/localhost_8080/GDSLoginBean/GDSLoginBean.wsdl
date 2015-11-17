@@ -19,6 +19,9 @@
 <message name="retrieveAccInfoResponse">
 <part name="parameters" element="tns:retrieveAccInfoResponse"/>
 </message>
+<message name="Exception">
+<part name="fault" element="tns:Exception"/>
+</message>
 <portType name="GDSLoginBean">
 <operation name="login">
 <input wsam:Action="http://GDS.SessionBean/GDSLoginBean/loginRequest" message="tns:login"/>
@@ -27,6 +30,7 @@
 <operation name="retrieveAccInfo">
 <input wsam:Action="http://GDS.SessionBean/GDSLoginBean/retrieveAccInfoRequest" message="tns:retrieveAccInfo"/>
 <output wsam:Action="http://GDS.SessionBean/GDSLoginBean/retrieveAccInfoResponse" message="tns:retrieveAccInfoResponse"/>
+<fault message="tns:Exception" name="Exception" wsam:Action="http://GDS.SessionBean/GDSLoginBean/retrieveAccInfo/Fault/Exception"/>
 </operation>
 </portType>
 <binding name="GDSLoginBeanPortBinding" type="tns:GDSLoginBean">
@@ -48,6 +52,9 @@
 <output>
 <soap:body use="literal"/>
 </output>
+<fault name="Exception">
+<soap:fault name="Exception" use="literal"/>
+</fault>
 </operation>
 </binding>
 <service name="GDSLoginBean">
