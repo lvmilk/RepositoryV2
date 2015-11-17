@@ -2,4 +2,5 @@
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
     <system systemId="http://localhost:8080/GDSLoginBean/GDSLoginBean?wsdl" uri="src/conf/xml-resources/web-service-references/GDSLoginBean/wsdl/localhost_8080/GDSLoginBean/GDSLoginBean.wsdl"/>
     <system systemId="http://localhost:8080/GDSLoginBean/GDSLoginBean?xsd=1" uri="src/conf/xml-resources/web-service-references/GDSLoginBean/wsdl/localhost_8080/GDSLoginBean/GDSLoginBean.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/GDSLoginBean/GDSLoginBean?xsd=2" uri="src/conf/xml-resources/web-service-references/GDSLoginBean/wsdl/localhost_8080/GDSLoginBean/GDSLoginBean.xsd_2.xsd"/>
 </catalog>
