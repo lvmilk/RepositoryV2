@@ -8,6 +8,10 @@
 
 <xs:element name="loginResponse" type="tns:loginResponse"/>
 
+<xs:element name="publishFlight" type="tns:publishFlight"/>
+
+<xs:element name="publishFlightResponse" type="tns:publishFlightResponse"/>
+
 <xs:element name="retrieveAccInfo" type="tns:retrieveAccInfo"/>
 
 <xs:element name="retrieveAccInfoResponse" type="tns:retrieveAccInfoResponse"/>
@@ -620,6 +624,26 @@
 <xs:complexType name="Exception">
 <xs:sequence>
 <xs:element name="message" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="publishFlight">
+<xs:sequence>
+<xs:element name="flightNo" type="xs:string" minOccurs="0"/>
+<xs:element name="flightDate" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="depTime" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="arrTime" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="depAirport" type="xs:string" minOccurs="0"/>
+<xs:element name="arrAirport" type="xs:string" minOccurs="0"/>
+<xs:element name="depIATA" type="xs:string" minOccurs="0"/>
+<xs:element name="arrIATA" type="xs:string" minOccurs="0"/>
+<xs:element name="seatQuota" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="publishFlightResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
 </xs:sequence>
 </xs:complexType>
 
