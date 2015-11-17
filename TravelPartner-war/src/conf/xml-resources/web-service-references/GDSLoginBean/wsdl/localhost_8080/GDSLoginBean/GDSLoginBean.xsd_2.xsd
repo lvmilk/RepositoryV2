@@ -638,6 +638,7 @@
 <xs:element name="depIATA" type="xs:string" minOccurs="0"/>
 <xs:element name="arrIATA" type="xs:string" minOccurs="0"/>
 <xs:element name="seatQuota" type="xs:int" minOccurs="0"/>
+<xs:element name="companyIATA" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
