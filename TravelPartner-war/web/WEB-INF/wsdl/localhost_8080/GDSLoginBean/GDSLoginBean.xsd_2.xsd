@@ -322,6 +322,7 @@
 <xs:element name="firstSB" type="xs:int" minOccurs="0"/>
 <xs:element name="hourPay" type="xs:double" minOccurs="0"/>
 <xs:element name="lastName" type="xs:string" minOccurs="0"/>
+<xs:element name="leaves" type="tns:staffLeave" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
 <xs:element name="licence" type="xs:string" minOccurs="0"/>
 <xs:element name="locked" type="xs:int" minOccurs="0"/>
 <xs:element name="monthAccumMin" type="xs:long"/>
@@ -333,6 +334,24 @@
 <xs:element name="user" type="tns:userEntity" minOccurs="0"/>
 <xs:element name="weekAccumMin" type="xs:long"/>
 <xs:element name="yearAccumMin" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="staffLeave">
+<xs:sequence>
+<xs:element name="applyDate" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="cabinCrew" type="tns:cabinCrew" minOccurs="0"/>
+<xs:element name="cockpitCrew" type="tns:cockpitCrew" minOccurs="0"/>
+<xs:element name="endDate" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="groundStaff" type="tns:groundStaff" minOccurs="0"/>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+<xs:element name="length" type="xs:int" minOccurs="0"/>
+<xs:element name="officeStaff" type="tns:officeStaff" minOccurs="0"/>
+<xs:element name="remark" type="xs:string" minOccurs="0"/>
+<xs:element name="staffType" type="xs:string" minOccurs="0"/>
+<xs:element name="startDate" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="status" type="xs:string" minOccurs="0"/>
+<xs:element name="userName" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -368,22 +387,6 @@
 <xs:element name="id" type="xs:long" minOccurs="0"/>
 <xs:element name="workDate" type="xs:dateTime" minOccurs="0"/>
 <xs:element name="workShift" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="staffLeave">
-<xs:sequence>
-<xs:element name="cabinCrew" type="tns:cabinCrew" minOccurs="0"/>
-<xs:element name="cockpitCrew" type="tns:cockpitCrew" minOccurs="0"/>
-<xs:element name="endDate" type="xs:dateTime" minOccurs="0"/>
-<xs:element name="groundStaff" type="tns:groundStaff" minOccurs="0"/>
-<xs:element name="id" type="xs:long" minOccurs="0"/>
-<xs:element name="length" type="xs:int" minOccurs="0"/>
-<xs:element name="officeStaff" type="tns:officeStaff" minOccurs="0"/>
-<xs:element name="remark" type="xs:string" minOccurs="0"/>
-<xs:element name="staffType" type="xs:string" minOccurs="0"/>
-<xs:element name="startDate" type="xs:dateTime" minOccurs="0"/>
-<xs:element name="status" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -638,7 +641,9 @@
 <xs:element name="depIATA" type="xs:string" minOccurs="0"/>
 <xs:element name="arrIATA" type="xs:string" minOccurs="0"/>
 <xs:element name="seatQuota" type="xs:int" minOccurs="0"/>
-<xs:element name="companyIATA" type="xs:string" minOccurs="0"/>
+<xs:element name="companyName" type="xs:string" minOccurs="0"/>
+<xs:element name="cabinName" type="xs:string" minOccurs="0"/>
+<xs:element name="price" type="xs:double" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

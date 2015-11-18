@@ -21,6 +21,9 @@
                     <h:outputLabel for="flightDate"  value="Flight Date:(YYYY-MM-DD)" />
                     <p:calendar  id="flightDate"  value="#{gdsFR.flightDate}"  mindate="#{gdsFR.currentDate}" pattern="yyyy-MM-dd" mask="true"   validatorMessage="Date: Please enter a valid date in format yyyy-MM-dd"  size="20">   
                     </p:calendar>    
+                    
+                    <p:outputLabel for="datetime" value="Datetime:" />
+                    <p:calendar id="datetime" value="#{gdsFR.depTime}" pattern="MM/dd/yyyy HH:mm:ss" />
 
                     <p:outputLabel for="depTime" value="Departure Time (HH:mm in UTC+00:00): " />
                     <p:calendar  id="depTime" value="#{gdsFR.depTime}" pattern="HH:mm" timeOnly="true" required="true" requiredMessage="Please enter flight departure time" size="30"/>
@@ -46,14 +49,31 @@
                     <p:outputLabel for="arrIATA" value="Arrival Airport IATA: " />
                     <p:inputText id="arrIATA" value="#{gdsFR.depIATA}" label="IATA" required="true" requiredMessage="Please enter airport IATA" size="30">
                     </p:inputText>
-                    
+
                     <p:outputLabel  value="Quota : " />
                     <p:inputText value="#{gdsFR.seatQuota}" required="true" requiredMessage="Please fill in the Quota" validatorMessage="Please enter at least 1">
                         <f:validateLongRange minimum="1"/>
                     </p:inputText>
-                    
+
+                    <p:outputLabel for="flightCabin" value="Select a Cabin Class: " />
+                    <p:selectOneMenu id="flightCabin" value="#{gdsFR.cabinName}" required="true" requiredMessage="Please select a cabin class" style=" width:100%">    
+                        <f:selectItem itemLabel="Select One Cabin Class" itemValue="" />
+                        <f:selectItem itemLabel="Suite" itemValue="Suite" />
+                        <f:selectItem itemLabel="First Class" itemValue="First Class" />
+                        <f:selectItem itemLabel="Business Class" itemValue="Business Class" />
+                        <f:selectItem itemLabel="Premium Economy Class" itemValue="Premium Economy Class" />
+                        <f:selectItem itemLabel="Economy Class" itemValue="Economy Class" />
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="price" value="Price:" />
+                    <p:inputText id="price"  value="#{gdsFR.price}" label="Price" required="true" validatorMessage="Please enter a number larger than 0"  size="10">
+                        <f:validateDoubleRange minimum="0.0"/>
+
+                    </p:inputText>
+
+
                     <p:commandButton update="rlFlight" value="Confirm" action="#{gdsFR.releaseFlight()}"  />
-                    
+
                 </h:panelGrid>
             </p:panel>
 

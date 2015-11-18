@@ -7,11 +7,15 @@ package GDSmanagedbean;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.persistence.Temporal;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.ws.WebServiceRef;
 import sessionbean.gds.AirAlliances;
 import sessionbean.gds.Exception_Exception;
@@ -29,6 +33,8 @@ public class GDS_FlightReleaseManagedBean implements Serializable {
     private GDSLoginBean_Service service;
 
     private String flightNo;
+
+    private GDS_WebserviceManagedBean gdsWebservice = new GDS_WebserviceManagedBean();
 
     private Date flightDate = new Date();
     private Date currentDate = new Date();
@@ -49,6 +55,9 @@ public class GDS_FlightReleaseManagedBean implements Serializable {
 
     private String depIATA;
     private String arrIATA;
+    
+    private String cabinName;
+    private Double price;
 
     @PostConstruct
     public void init() {
@@ -62,9 +71,19 @@ public class GDS_FlightReleaseManagedBean implements Serializable {
             ex.printStackTrace();
         }
     }
-    
-    public void releaseFlight(){
+
+    public void releaseFlight() throws DatatypeConfigurationException {
         System.out.println("********This is in release flight");
+        GregorianCalendar c = new GregorianCalendar();
+        c.setTime(flightDate);
+        XMLGregorianCalendar flightDateCovert = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
+        
+        c.setTime(depTime);
+        XMLGregorianCalendar depTimeConvert= DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
+        
+        c.setTime(arrTime);
+        XMLGregorianCalendar arrTimeConvert= DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
+        publishFlight(flightNo, flightDateCovert, depTimeConvert, arrTimeConvert, depAirport, arrAirport, depIATA, arrIATA, seatQuota, companyName, cabinName, price);
     }
 
     private AirAlliances retrieveAccInfo(java.lang.String gdsUserId) throws Exception_Exception {
@@ -282,6 +301,41 @@ public class GDS_FlightReleaseManagedBean implements Serializable {
      */
     public void setArrIATA(String arrIATA) {
         this.arrIATA = arrIATA;
+    }
+
+    /**
+     * @return the cabinName
+     */
+    public String getCabinName() {
+        return cabinName;
+    }
+
+    /**
+     * @param cabinName the cabinName to set
+     */
+    public void setCabinName(String cabinName) {
+        this.cabinName = cabinName;
+    }
+
+    /**
+     * @return the price
+     */
+    public Double getPrice() {
+        return price;
+    }
+
+    /**
+     * @param price the price to set
+     */
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    private boolean publishFlight(java.lang.String flightNo, javax.xml.datatype.XMLGregorianCalendar flightDate, javax.xml.datatype.XMLGregorianCalendar depTime, javax.xml.datatype.XMLGregorianCalendar arrTime, java.lang.String depAirport, java.lang.String arrAirport, java.lang.String depIATA, java.lang.String arrIATA, java.lang.Integer seatQuota, java.lang.String companyName, java.lang.String cabinName, java.lang.Double price) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        sessionbean.gds.GDSLoginBean port = service.getGDSLoginBeanPort();
+        return port.publishFlight(flightNo, flightDate, depTime, arrTime, depAirport, arrAirport, depIATA, arrIATA, seatQuota, companyName, cabinName, price);
     }
 
 }
