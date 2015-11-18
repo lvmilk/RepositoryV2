@@ -34,8 +34,6 @@ public class GDS_FlightReleaseManagedBean implements Serializable {
 
     private String flightNo;
 
-    private GDS_WebserviceManagedBean gdsWebservice = new GDS_WebserviceManagedBean();
-
     private Date flightDate = new Date();
     private Date currentDate = new Date();
 
@@ -75,15 +73,13 @@ public class GDS_FlightReleaseManagedBean implements Serializable {
     public void releaseFlight() throws DatatypeConfigurationException {
         System.out.println("********This is in release flight");
         GregorianCalendar c = new GregorianCalendar();
-        c.setTime(flightDate);
-        XMLGregorianCalendar flightDateCovert = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
-        
+     
         c.setTime(depTime);
         XMLGregorianCalendar depTimeConvert= DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
         
         c.setTime(arrTime);
         XMLGregorianCalendar arrTimeConvert= DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
-        publishFlight(flightNo, flightDateCovert, depTimeConvert, arrTimeConvert, depAirport, arrAirport, depIATA, arrIATA, seatQuota, companyName, cabinName, price);
+        publishFlight(flightNo, depTimeConvert, arrTimeConvert, depAirport, arrAirport, depIATA, arrIATA, seatQuota, companyName, cabinName, price);
     }
 
     private AirAlliances retrieveAccInfo(java.lang.String gdsUserId) throws Exception_Exception {
@@ -331,11 +327,12 @@ public class GDS_FlightReleaseManagedBean implements Serializable {
         this.price = price;
     }
 
-    private boolean publishFlight(java.lang.String flightNo, javax.xml.datatype.XMLGregorianCalendar flightDate, javax.xml.datatype.XMLGregorianCalendar depTime, javax.xml.datatype.XMLGregorianCalendar arrTime, java.lang.String depAirport, java.lang.String arrAirport, java.lang.String depIATA, java.lang.String arrIATA, java.lang.Integer seatQuota, java.lang.String companyName, java.lang.String cabinName, java.lang.Double price) {
+
+    private boolean publishFlight(java.lang.String flightNo, javax.xml.datatype.XMLGregorianCalendar depTime, javax.xml.datatype.XMLGregorianCalendar arrTime, java.lang.String depAirport, java.lang.String arrAirport, java.lang.String depIATA, java.lang.String arrIATA, java.lang.Integer seatQuota, java.lang.String companyName, java.lang.String cabinName, java.lang.Double price) {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
         sessionbean.gds.GDSLoginBean port = service.getGDSLoginBeanPort();
-        return port.publishFlight(flightNo, flightDate, depTime, arrTime, depAirport, arrAirport, depIATA, arrIATA, seatQuota, companyName, cabinName, price);
+        return port.publishFlight(flightNo, depTime, arrTime, depAirport, arrAirport, depIATA, arrIATA, seatQuota, companyName, cabinName, price);
     }
 
 }

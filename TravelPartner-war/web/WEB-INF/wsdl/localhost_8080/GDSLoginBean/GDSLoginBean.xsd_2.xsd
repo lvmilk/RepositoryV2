@@ -633,7 +633,6 @@
 <xs:complexType name="publishFlight">
 <xs:sequence>
 <xs:element name="flightNo" type="xs:string" minOccurs="0"/>
-<xs:element name="flightDate" type="xs:dateTime" minOccurs="0"/>
 <xs:element name="depTime" type="xs:dateTime" minOccurs="0"/>
 <xs:element name="arrTime" type="xs:dateTime" minOccurs="0"/>
 <xs:element name="depAirport" type="xs:string" minOccurs="0"/>

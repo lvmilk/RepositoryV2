@@ -16,20 +16,15 @@
                     <p:outputLabel value="#{gdsFR.companyName}" />
 
                     <p:outputLabel  value="Flight No. : " />
-                    <p:inputText value="#{gdsFR.flightNo}" required="true" requiredMessage="Please enter a Flight No" />
+                    <p:inputText value="#{gdsFR.flightNo}" required="true" requiredMessage="Please enter a Flight No" /> 
 
-                    <h:outputLabel for="flightDate"  value="Flight Date:(YYYY-MM-DD)" />
-                    <p:calendar  id="flightDate"  value="#{gdsFR.flightDate}"  mindate="#{gdsFR.currentDate}" pattern="yyyy-MM-dd" mask="true"   validatorMessage="Date: Please enter a valid date in format yyyy-MM-dd"  size="20">   
-                    </p:calendar>    
-                    
-                    <p:outputLabel for="datetime" value="Datetime:" />
-                    <p:calendar id="datetime" value="#{gdsFR.depTime}" pattern="MM/dd/yyyy HH:mm:ss" />
+                    <p:outputLabel for="depDatetime" value="Departure Datetime:" />
+                    <p:calendar id="depDatetime" value="#{gdsFR.depTime}" mindate="#{gdsFR.currentDate}" pattern="MM/dd/yyyy HH:mm:ss" required="true" requiredMessage="Please enter flight departure time" size="30">
+                        <p:ajax  event="dateSelect"  process="@this" update=":rlFlight:arrDatetime "/> 
+                    </p:calendar>
 
-                    <p:outputLabel for="depTime" value="Departure Time (HH:mm in UTC+00:00): " />
-                    <p:calendar  id="depTime" value="#{gdsFR.depTime}" pattern="HH:mm" timeOnly="true" required="true" requiredMessage="Please enter flight departure time" size="30"/>
-
-                    <p:outputLabel for="arrTime" value="Arrival Time (HH:mm in UTC+00:00): " />
-                    <p:calendar  id="arrTime" value="#{gdsFR.arrTime}" pattern="HH:mm" timeOnly="true" required="true" requiredMessage="Please enter flight arrival time" size="30"/>
+                    <p:outputLabel for="arrDatetime" value="Arrival Datetime:" />
+                    <p:calendar id="arrDatetime" value="#{gdsFR.arrTime}" mindate="#{gdsFR.depTime}" pattern="MM/dd/yyyy HH:mm:ss" required="true" requiredMessage="Please enter flight arrival time" size="30"/>
 
                     <p:outputLabel for="depAirportName" value="Departure Airport : " />
                     <p:inputText id="depAirportName" value="#{gdsFR.depAirport}" label="depAirportName" required="true" validatorMessage="Airport Name: please enter a valid airport name" requiredMessage="Please enter airport name" size="30" >
