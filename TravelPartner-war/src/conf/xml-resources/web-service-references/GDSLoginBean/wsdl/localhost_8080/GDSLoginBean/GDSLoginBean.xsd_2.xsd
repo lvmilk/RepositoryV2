@@ -272,10 +272,56 @@
 <xs:element name="firstSB" type="xs:int" minOccurs="0"/>
 <xs:element name="hourPay" type="xs:double" minOccurs="0"/>
 <xs:element name="lastName" type="xs:string" minOccurs="0"/>
+<xs:element name="leaves" type="tns:staffLeave" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
 <xs:element name="locked" type="xs:int" minOccurs="0"/>
 <xs:element name="monthAccumMin" type="xs:long"/>
 <xs:element name="salary" type="xs:double" minOccurs="0"/>
 <xs:element name="secondLang" type="xs:string" minOccurs="0"/>
+<xs:element name="secondSB" type="xs:int" minOccurs="0"/>
+<xs:element name="stfLevel" type="xs:string" minOccurs="0"/>
+<xs:element name="stfType" type="xs:string" minOccurs="0"/>
+<xs:element name="taskList" type="tns:flightTask" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="user" type="tns:userEntity" minOccurs="0"/>
+<xs:element name="weekAccumMin" type="xs:long"/>
+<xs:element name="yearAccumMin" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="staffLeave">
+<xs:sequence>
+<xs:element name="applyDate" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="cabinCrew" type="tns:cabinCrew" minOccurs="0"/>
+<xs:element name="cockpitCrew" type="tns:cockpitCrew" minOccurs="0"/>
+<xs:element name="endDate" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="groundStaff" type="tns:groundStaff" minOccurs="0"/>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+<xs:element name="length" type="xs:int" minOccurs="0"/>
+<xs:element name="officeStaff" type="tns:officeStaff" minOccurs="0"/>
+<xs:element name="remark" type="xs:string" minOccurs="0"/>
+<xs:element name="staffType" type="xs:string" minOccurs="0"/>
+<xs:element name="startDate" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="status" type="xs:string" minOccurs="0"/>
+<xs:element name="userName" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="cockpitCrew">
+<xs:sequence>
+<xs:element name="attempt" type="xs:int" minOccurs="0"/>
+<xs:element name="cpName" type="xs:string" minOccurs="0"/>
+<xs:element name="cpPassword" type="xs:string" minOccurs="0"/>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+<xs:element name="fiList" type="tns:flightInstance" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="fiStandByList" type="tns:flightInstance" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="firstName" type="xs:string" minOccurs="0"/>
+<xs:element name="firstSB" type="xs:int" minOccurs="0"/>
+<xs:element name="hourPay" type="xs:double" minOccurs="0"/>
+<xs:element name="lastName" type="xs:string" minOccurs="0"/>
+<xs:element name="leaves" type="tns:staffLeave" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="licence" type="xs:string" minOccurs="0"/>
+<xs:element name="locked" type="xs:int" minOccurs="0"/>
+<xs:element name="monthAccumMin" type="xs:long"/>
+<xs:element name="salary" type="xs:double" minOccurs="0"/>
 <xs:element name="secondSB" type="xs:int" minOccurs="0"/>
 <xs:element name="stfLevel" type="xs:string" minOccurs="0"/>
 <xs:element name="stfType" type="xs:string" minOccurs="0"/>
@@ -307,51 +353,6 @@
 <xs:element name="sendMessage" type="tns:msgSender" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
 <xs:element name="userLog" type="tns:userLog" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
 <xs:element name="username" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="cockpitCrew">
-<xs:sequence>
-<xs:element name="attempt" type="xs:int" minOccurs="0"/>
-<xs:element name="cpName" type="xs:string" minOccurs="0"/>
-<xs:element name="cpPassword" type="xs:string" minOccurs="0"/>
-<xs:element name="email" type="xs:string" minOccurs="0"/>
-<xs:element name="fiList" type="tns:flightInstance" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-<xs:element name="fiStandByList" type="tns:flightInstance" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-<xs:element name="firstName" type="xs:string" minOccurs="0"/>
-<xs:element name="firstSB" type="xs:int" minOccurs="0"/>
-<xs:element name="hourPay" type="xs:double" minOccurs="0"/>
-<xs:element name="lastName" type="xs:string" minOccurs="0"/>
-<xs:element name="leaves" type="tns:staffLeave" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-<xs:element name="licence" type="xs:string" minOccurs="0"/>
-<xs:element name="locked" type="xs:int" minOccurs="0"/>
-<xs:element name="monthAccumMin" type="xs:long"/>
-<xs:element name="salary" type="xs:double" minOccurs="0"/>
-<xs:element name="secondSB" type="xs:int" minOccurs="0"/>
-<xs:element name="stfLevel" type="xs:string" minOccurs="0"/>
-<xs:element name="stfType" type="xs:string" minOccurs="0"/>
-<xs:element name="taskList" type="tns:flightTask" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-<xs:element name="user" type="tns:userEntity" minOccurs="0"/>
-<xs:element name="weekAccumMin" type="xs:long"/>
-<xs:element name="yearAccumMin" type="xs:long"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="staffLeave">
-<xs:sequence>
-<xs:element name="applyDate" type="xs:dateTime" minOccurs="0"/>
-<xs:element name="cabinCrew" type="tns:cabinCrew" minOccurs="0"/>
-<xs:element name="cockpitCrew" type="tns:cockpitCrew" minOccurs="0"/>
-<xs:element name="endDate" type="xs:dateTime" minOccurs="0"/>
-<xs:element name="groundStaff" type="tns:groundStaff" minOccurs="0"/>
-<xs:element name="id" type="xs:long" minOccurs="0"/>
-<xs:element name="length" type="xs:int" minOccurs="0"/>
-<xs:element name="officeStaff" type="tns:officeStaff" minOccurs="0"/>
-<xs:element name="remark" type="xs:string" minOccurs="0"/>
-<xs:element name="staffType" type="xs:string" minOccurs="0"/>
-<xs:element name="startDate" type="xs:dateTime" minOccurs="0"/>
-<xs:element name="status" type="xs:string" minOccurs="0"/>
-<xs:element name="userName" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -643,6 +644,10 @@
 <xs:element name="companyName" type="xs:string" minOccurs="0"/>
 <xs:element name="cabinName" type="xs:string" minOccurs="0"/>
 <xs:element name="price" type="xs:double" minOccurs="0"/>
+<xs:element name="rowStart" type="xs:int" minOccurs="0"/>
+<xs:element name="rowEnd" type="xs:int" minOccurs="0"/>
+<xs:element name="columnStart" type="xs:unsignedShort"/>
+<xs:element name="columnEnd" type="xs:unsignedShort"/>
 </xs:sequence>
 </xs:complexType>
 

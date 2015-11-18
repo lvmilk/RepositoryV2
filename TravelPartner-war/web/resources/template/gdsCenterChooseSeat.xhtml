@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form id="chooseSeat" >
+            <p:panel id="csPanel"  style="margin-bottom:20px">
+                <p:messages id="msgs" showDetail="false" />
+                <h:panelGrid  columns="2"   cellpadding="10">
+                    <p:outputLabel  value="Airline Name: " />
+                    <p:outputLabel value="#{gdsFR.companyName}" />
+
+                    <p:outputLabel  value="Row number starts : " />
+                    <p:inputText value="#{gdsFR.rowStart}" required="true" requiredMessage="Please enter a row number" /> 
+                    
+                    <p:outputLabel  value="Row number ends : " />
+                    <p:inputText value="#{gdsFR.rowEnd}" required="true" requiredMessage="Please enter a row number" /> 
+                    
+                    <p:outputLabel  value="Column character starts : " />
+                    <p:inputText value="#{gdsFR.columnStart}" required="true" requiredMessage="Please enter a column character" /> 
+                    
+                    <p:outputLabel  value="Column character ends : " />
+                    <p:inputText value="#{gdsFR.columnEnd}" required="true" requiredMessage="Please enter a column character" /> 
+                    
+                    <p:commandButton update="rlFlight" value="Confirm" action="#{gdsFR.arrangeSeat()}"  />
+                    
+                </h:panelGrid>
+            </p:panel>
+
+        </h:form>
+    </h:body>
+</html>
+
