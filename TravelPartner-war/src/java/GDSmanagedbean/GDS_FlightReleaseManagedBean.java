@@ -5,6 +5,7 @@
  */
 package GDSmanagedbean;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -53,9 +54,15 @@ public class GDS_FlightReleaseManagedBean implements Serializable {
 
     private String depIATA;
     private String arrIATA;
-    
+
     private String cabinName;
     private Double price;
+
+    private Integer rowStart;
+    private Integer rowEnd;
+
+    private char columnStart;
+    private char columnEnd;
 
     @PostConstruct
     public void init() {
@@ -70,16 +77,33 @@ public class GDS_FlightReleaseManagedBean implements Serializable {
         }
     }
 
-    public void releaseFlight() throws DatatypeConfigurationException {
-        System.out.println("********This is in release flight");
+    public void arrangeSeat() throws IOException, DatatypeConfigurationException {
+        int i, j, cRow = 0, cColumn = 0;
+        for (i = rowStart; i <= rowEnd; i++) {
+            cRow++;
+        }
+
+        for (j = columnStart; j <= columnEnd; j++) {
+            cColumn++;
+        }
+
+        seatQuota = cRow * cColumn;
+
         GregorianCalendar c = new GregorianCalendar();
-     
+
         c.setTime(depTime);
-        XMLGregorianCalendar depTimeConvert= DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
-        
+        XMLGregorianCalendar depTimeConvert = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
+
         c.setTime(arrTime);
-        XMLGregorianCalendar arrTimeConvert= DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
-        publishFlight(flightNo, depTimeConvert, arrTimeConvert, depAirport, arrAirport, depIATA, arrIATA, seatQuota, companyName, cabinName, price);
+        XMLGregorianCalendar arrTimeConvert = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
+        publishFlight(flightNo, depTimeConvert, arrTimeConvert, depAirport, arrAirport, depIATA, arrIATA, seatQuota, companyName, cabinName, price, rowStart, rowEnd, columnStart, columnEnd);
+
+    }
+
+    public void releaseFlight() throws DatatypeConfigurationException, IOException {
+        System.out.println("********This is in release flight");
+
+        FacesContext.getCurrentInstance().getExternalContext().redirect("./gdsCenterChooseSeat.xhtml");
     }
 
     private AirAlliances retrieveAccInfo(java.lang.String gdsUserId) throws Exception_Exception {
@@ -328,11 +352,67 @@ public class GDS_FlightReleaseManagedBean implements Serializable {
     }
 
 
-    private boolean publishFlight(java.lang.String flightNo, javax.xml.datatype.XMLGregorianCalendar depTime, javax.xml.datatype.XMLGregorianCalendar arrTime, java.lang.String depAirport, java.lang.String arrAirport, java.lang.String depIATA, java.lang.String arrIATA, java.lang.Integer seatQuota, java.lang.String companyName, java.lang.String cabinName, java.lang.Double price) {
+    private boolean publishFlight(java.lang.String flightNo, javax.xml.datatype.XMLGregorianCalendar depTime, javax.xml.datatype.XMLGregorianCalendar arrTime, java.lang.String depAirport, java.lang.String arrAirport, java.lang.String depIATA, java.lang.String arrIATA, java.lang.Integer seatQuota, java.lang.String companyName, java.lang.String cabinName, java.lang.Double price, java.lang.Integer rowStart, java.lang.Integer rowEnd, int columnStart, int columnEnd) {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
         sessionbean.gds.GDSLoginBean port = service.getGDSLoginBeanPort();
-        return port.publishFlight(flightNo, depTime, arrTime, depAirport, arrAirport, depIATA, arrIATA, seatQuota, companyName, cabinName, price);
+        return port.publishFlight(flightNo, depTime, arrTime, depAirport, arrAirport, depIATA, arrIATA, seatQuota, companyName, cabinName, price, rowStart, rowEnd, columnStart, columnEnd);
+    }
+
+    /**
+     * @return the rowStart
+     */
+    public Integer getRowStart() {
+        return rowStart;
+    }
+
+    /**
+     * @param rowStart the rowStart to set
+     */
+    public void setRowStart(Integer rowStart) {
+        this.rowStart = rowStart;
+    }
+
+    /**
+     * @return the rowEnd
+     */
+    public Integer getRowEnd() {
+        return rowEnd;
+    }
+
+    /**
+     * @param rowEnd the rowEnd to set
+     */
+    public void setRowEnd(Integer rowEnd) {
+        this.rowEnd = rowEnd;
+    }
+
+    /**
+     * @return the columnStart
+     */
+    public char getColumnStart() {
+        return columnStart;
+    }
+
+    /**
+     * @param columnStart the columnStart to set
+     */
+    public void setColumnStart(char columnStart) {
+        this.columnStart = columnStart;
+    }
+
+    /**
+     * @return the columnEnd
+     */
+    public char getColumnEnd() {
+        return columnEnd;
+    }
+
+    /**
+     * @param columnEnd the columnEnd to set
+     */
+    public void setColumnEnd(char columnEnd) {
+        this.columnEnd = columnEnd;
     }
 
 }
