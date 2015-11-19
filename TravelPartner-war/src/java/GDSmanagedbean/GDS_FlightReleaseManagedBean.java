@@ -72,6 +72,7 @@ public class GDS_FlightReleaseManagedBean implements Serializable {
             al = retrieveAccInfo(username);
             System.out.println("************This is in GDS_FlightRelease:" + al.getName());
             companyName = al.getName();
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("companyName", companyName);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

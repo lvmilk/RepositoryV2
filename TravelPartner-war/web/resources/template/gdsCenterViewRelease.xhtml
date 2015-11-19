@@ -1,0 +1,209 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pm="http://primefaces.org/mobile"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>View Released Flight</title>
+    </h:head>
+    <h:body>
+        <h:form id="viewRelease" >
+            <p:panel id="panel" header="View All Released Flight"  style="width:100%">
+                <p:dataTable var="rl" value="#{gdsVRF.rlList}" paginator="true" rows="10" emptyMessage="No Reservations" >
+
+                    <p:column headerText="Airline" >
+                        <h:outputText value="#{rl.companyName}" />
+                    </p:column>
+                    
+                    <p:column headerText="Released id" sortBy="#{rl.id}" filterBy="#{rl.id}" >
+                        <h:outputText value="#{rl.id}" />
+                    </p:column>
+
+                    <p:column headerText="Flight No" sortBy="#{rl.flightNo}" >
+                        <h:outputText value="#{rl.flightNo}" />
+                    </p:column>
+
+                    <p:column headerText="Departure Time" >
+                        <h:outputText value="#{rl.depTime}" />
+                    </p:column>
+                    <p:column headerText="Arrival Time">
+                        <h:outputText value="#{rl.arrTime}" />
+                    </p:column>
+                    <p:column headerText="Departure Airport">
+                        <h:outputText value="#{rl.depAirport}" />
+                    </p:column>
+                    
+                    <p:column headerText="Arrival Airport">
+                        <h:outputText value="#{rl.arrAirport}" />
+                    </p:column>
+
+                    <p:column headerText="Departure IATA">
+                        <h:outputText value="#{rl.depIATA}" />
+                    </p:column>
+                    <p:column headerText="Arrival IATA">
+                        <h:outputText value="#{rl.arrIATA} " />
+                    </p:column>
+                    
+                    <p:column headerText="Seat Quota">
+                        <h:outputText value="#{rl.seatQuota}" />
+                    </p:column>
+                    <p:column headerText="Available Seat">
+                        <h:outputText value="#{rl.availableSeat} " />
+                    </p:column>
+                    <p:column headerText="Booked Seat">
+                        <h:outputText value="#{rl.bookedSeat} " />
+                    </p:column>
+                    
+                    <p:column headerText="Cabin Name">
+                        <h:outputText value="#{rl.cabinName} " />
+                    </p:column>
+                    <p:column headerText="Price">
+                        <h:outputText value="#{rl.price} " />
+                    </p:column>
+                    
+
+
+                </p:dataTable>
+            </p:panel>
+            <p:separator />
+            <br/>
+            <br/>
+
+<!--            <p:panel id="detail" header="Reservation Detail" rendered="#{viewReservation.departed.size()>0}" toggleable="true">
+                <p:panel header="Departure Trip " >             
+                    <ui:repeat value="#{viewReservation.departed}" var="instance" varStatus="myStatus">
+                        <h:panelGrid columns="8" cellpadding="15" >
+
+                            <p:outputLabel  value="FlightNo: " />
+                            <p:outputLabel value="#{instance.flightFrequency.flightNo}" />
+
+                            <p:outputLabel  value="Departure Time " />
+                            <p:outputLabel value="#{instance.standardDepTimeDateType}" />
+
+                            <p:outputLabel  value="Depart From: " />
+                            <p:outputLabel value="#{instance.flightFrequency.route.origin.airportName}" />
+
+                            <p:outputLabel  value="Aircraft Type: " />
+                            <p:outputLabel value="#{instance.flightFrequency.route.acType.type}" />
+
+                            <p:outputLabel  value="Cabin Class: " />
+                            <p:outputLabel value="#{viewReservation.flightToBkInstance[instance].getFlightCabin().getCabinClass().getCabinName()}" />
+
+                            <p:outputLabel  value="Arrival Time Time: " />
+                            <p:outputLabel value="#{instance.standardArrTimeDateType}" />
+
+                            <p:outputLabel  value="Arrive At: " />
+                            <p:outputLabel value="#{instance.flightFrequency.route.dest.airportName}" />
+
+                        </h:panelGrid>
+                        <p:separator />
+                    </ui:repeat>
+                </p:panel>
+
+                <br/>
+                <p:panel header="Return Trip " rendered="#{viewReservation.returned.size()>0}">             
+                    <ui:repeat value="#{viewReservation.returned}" var="instance">
+
+                        <h:panelGrid columns="8" cellpadding="15" >
+
+                            <p:outputLabel  value="FlightNo: " />
+                            <p:outputLabel value="#{instance.flightFrequency.flightNo}" />
+
+                            <p:outputLabel  value="Departure Time " />
+                            <p:outputLabel value="#{instance.standardDepTimeDateType}" />
+
+                            <p:outputLabel  value="Depart From: " />
+                            <p:outputLabel value="#{instance.flightFrequency.route.origin.airportName}" />
+
+                            <p:outputLabel  value="Aircraft Type: " />
+                            <p:outputLabel value="#{instance.flightFrequency.route.acType.type}" />
+
+                            <p:outputLabel  value="Cabin Class: " />
+                            <p:outputLabel value="#{viewReservation.flightToBkInstance[instance].getFlightCabin().getCabinClass().getCabinName()}" />
+
+                            <p:outputLabel  value="Arrival Time Time: " />
+                            <p:outputLabel value="#{instance.standardArrTimeDateType}" />
+
+                            <p:outputLabel  value="Arrive At: " />
+                            <p:outputLabel value="#{instance.flightFrequency.route.dest.airportName}" />
+
+                        </h:panelGrid>
+
+                        <p:separator />
+                    </ui:repeat>
+                </p:panel>
+                <br />
+
+                <p:panel id="booker" header="Booker"   toggleable="true" style="width:45%">
+                    <h:panelGrid columns="4" cellpadding="10" >
+                        <p:outputLabel  value="Title" />
+                        <p:outputLabel value="#{viewReservation.selectedRsv.booker.title}" />
+
+                        <p:outputLabel  value="Name" />
+                        <p:outputLabel value="#{viewReservation.selectedRsv.booker.firstName} #{viewReservation.selectedRsv.booker.lastName}" />
+
+                        <p:outputLabel  value="Email" />
+                        <p:outputLabel value="#{viewReservation.selectedRsv.booker.email}" />
+
+                        <p:outputLabel  value="Address" />
+                        <p:outputLabel value="#{viewReservation.selectedRsv.booker.address}" />
+
+                        <p:outputLabel  value="Contact No" />
+                        <p:outputLabel value="#{viewReservation.selectedRsv.booker.contact}" />
+                    </h:panelGrid>
+
+                </p:panel>
+
+
+                <br/>
+                <p:panel id="passenger" header="Passenger"  rendered="#{viewReservation.departed.size()>0}" toggleable="true" style="width:45%">
+                    <p:dataTable var="passenger" value="#{viewReservation.psgList}" rows="10" emptyMessage="No Reservations" >
+
+                        <p:column headerText="Title" >
+                            <h:outputText value="#{passenger.title}" />
+                        </p:column>
+
+                        <p:column headerText="Given Name" >
+                            <h:outputText value="#{passenger.firstName}" />
+                        </p:column>
+
+                        <p:column headerText="Surname" sortBy="#{passenger.lastName}" >
+                            <h:outputText value="#{passenger.lastName}" />
+                        </p:column>
+
+                        <p:column headerText="Passport No.">
+                            <h:outputText value="#{passenger.passport}" />
+                        </p:column>
+
+
+                    </p:dataTable>
+                </p:panel>
+                
+                <p:panel id="payment" header="Payment"   toggleable="true" style="width:45%">
+                    <h:panelGrid columns="4" cellpadding="10" >
+
+                        <p:outputLabel  value="Payment ID: " />
+                        <p:outputLabel value="#{viewReservation.selectedRsv.payment.paymentID}" />
+
+                        <p:outputLabel  value="Date of Payment: " />
+                        <p:outputLabel value="#{viewReservation.selectedRsv.payment.paymentDate.toString()}" />
+
+                        <p:outputLabel  value="Amount of Payment" />
+                        <p:outputLabel value="#{viewReservation.selectedRsv.payment.totalPrice}" />
+                    </h:panelGrid>
+
+                </p:panel>
+                
+                
+            </p:panel>-->
+
+    
+
+        </h:form>
+    </h:body>
+</html>
+
