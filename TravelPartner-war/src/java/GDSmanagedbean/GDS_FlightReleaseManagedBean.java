@@ -89,7 +89,20 @@ public class GDS_FlightReleaseManagedBean implements Serializable {
 
         seatQuota = cRow * cColumn;
 
+        flightNo=(String)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("flightNo");
+        depTime=(Date)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("depTime");
+        arrTime=(Date)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("arrTime");
+        depAirport=(String)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("depAirport");
+        arrAirport=(String)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("arrAirport");
+        depIATA=(String)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("depIATA");
+        arrIATA=(String)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("arrIATA");
+        cabinName=(String)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("cabinName");
+        price=(Double)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("price");
+        
+        
         GregorianCalendar c = new GregorianCalendar();
+        System.out.println("*******Seat Quota is:" + seatQuota);
+        System.out.println("*******DepTime is:" + depTime);
 
         c.setTime(depTime);
         XMLGregorianCalendar depTimeConvert = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
@@ -97,13 +110,22 @@ public class GDS_FlightReleaseManagedBean implements Serializable {
         c.setTime(arrTime);
         XMLGregorianCalendar arrTimeConvert = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
         publishFlight(flightNo, depTimeConvert, arrTimeConvert, depAirport, arrAirport, depIATA, arrIATA, seatQuota, companyName, cabinName, price, rowStart, rowEnd, columnStart, columnEnd);
-
+        FacesContext.getCurrentInstance().getExternalContext().redirect("./gdsFlightReleaseSuccess.xhtml");
     }
 
     public void releaseFlight() throws DatatypeConfigurationException, IOException {
         System.out.println("********This is in release flight");
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("flightNo", flightNo);
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("depTime", depTime);
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("arrTime", arrTime);
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("depAirport", depAirport);
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("arrAirport", arrAirport);
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("depIATA", depIATA);
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("arrIATA", arrIATA);
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("cabinName", cabinName);
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("price", price);
 
-        FacesContext.getCurrentInstance().getExternalContext().redirect("./gdsCenterChooseSeat.xhtml");
+        FacesContext.getCurrentInstance().getExternalContext().redirect("./gdsChooseSeat.xhtml");
     }
 
     private AirAlliances retrieveAccInfo(java.lang.String gdsUserId) throws Exception_Exception {
@@ -350,7 +372,6 @@ public class GDS_FlightReleaseManagedBean implements Serializable {
     public void setPrice(Double price) {
         this.price = price;
     }
-
 
     private boolean publishFlight(java.lang.String flightNo, javax.xml.datatype.XMLGregorianCalendar depTime, javax.xml.datatype.XMLGregorianCalendar arrTime, java.lang.String depAirport, java.lang.String arrAirport, java.lang.String depIATA, java.lang.String arrIATA, java.lang.Integer seatQuota, java.lang.String companyName, java.lang.String cabinName, java.lang.Double price, java.lang.Integer rowStart, java.lang.Integer rowEnd, int columnStart, int columnEnd) {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.

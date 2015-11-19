@@ -19,12 +19,12 @@
                     <p:inputText value="#{gdsFR.flightNo}" required="true" requiredMessage="Please enter a Flight No" /> 
 
                     <p:outputLabel for="depDatetime" value="Departure Datetime:" />
-                    <p:calendar id="depDatetime" value="#{gdsFR.depTime}" mindate="#{gdsFR.currentDate}" pattern="MM/dd/yyyy HH:mm:ss" required="true" requiredMessage="Please enter flight departure time" size="30">
+                    <p:calendar id="depDatetime" value="#{gdsFR.depTime}" mindate="#{gdsFR.currentDate}" pattern="MM/dd/yyyy HH:mm" required="true" requiredMessage="Please enter flight departure time" size="30">
                         <p:ajax  event="dateSelect"  process="@this" update=":rlFlight:arrDatetime "/> 
                     </p:calendar>
 
                     <p:outputLabel for="arrDatetime" value="Arrival Datetime:" />
-                    <p:calendar id="arrDatetime" value="#{gdsFR.arrTime}" mindate="#{gdsFR.depTime}" pattern="MM/dd/yyyy HH:mm:ss" required="true" requiredMessage="Please enter flight arrival time" size="30"/>
+                    <p:calendar id="arrDatetime" value="#{gdsFR.arrTime}" mindate="#{gdsFR.depTime}" pattern="MM/dd/yyyy HH:mm" required="true" requiredMessage="Please enter flight arrival time" size="30"/>
 
                     <p:outputLabel for="depAirportName" value="Departure Airport : " />
                     <p:inputText id="depAirportName" value="#{gdsFR.depAirport}" label="depAirportName" required="true" validatorMessage="Airport Name: please enter a valid airport name" requiredMessage="Please enter airport name" size="30" >
@@ -45,10 +45,6 @@
                     <p:inputText id="arrIATA" value="#{gdsFR.depIATA}" label="IATA" required="true" requiredMessage="Please enter airport IATA" size="30">
                     </p:inputText>
 
-<!--                    <p:outputLabel  value="Quota : " />
-                    <p:inputText value="#{gdsFR.seatQuota}" required="true" requiredMessage="Please fill in the Quota" validatorMessage="Please enter at least 1">
-                        <f:validateLongRange minimum="1"/>
-                    </p:inputText>-->
 
                     <p:outputLabel for="flightCabin" value="Select a Cabin Class: " />
                     <p:selectOneMenu id="flightCabin" value="#{gdsFR.cabinName}" required="true" requiredMessage="Please select a cabin class" style=" width:100%">    
