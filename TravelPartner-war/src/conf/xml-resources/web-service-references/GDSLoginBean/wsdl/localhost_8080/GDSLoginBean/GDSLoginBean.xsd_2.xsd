@@ -16,6 +16,10 @@
 
 <xs:element name="retrieveAccInfoResponse" type="tns:retrieveAccInfoResponse"/>
 
+<xs:element name="searchFlight" type="tns:searchFlight"/>
+
+<xs:element name="searchFlightResponse" type="tns:searchFlightResponse"/>
+
 <xs:element name="viewReleasedFlight" type="tns:viewReleasedFlight"/>
 
 <xs:element name="viewReleasedFlightResponse" type="tns:viewReleasedFlightResponse"/>
@@ -665,7 +669,6 @@
 <xs:element name="price" type="xs:double" minOccurs="0"/>
 <xs:element name="rsv" type="tns:gdsReservation" minOccurs="0"/>
 <xs:element name="seatQuota" type="xs:int" minOccurs="0"/>
-<xs:element name="seats" type="tns:gdsSeat" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -722,16 +725,17 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="gdsSeat">
+<xs:complexType name="searchFlight">
 <xs:sequence>
-<xs:element name="cabinClass" type="xs:string" minOccurs="0"/>
-<xs:element name="colNo" type="xs:unsignedShort"/>
-<xs:element name="flight" type="tns:gdsFlight" minOccurs="0"/>
-<xs:element name="id" type="xs:long" minOccurs="0"/>
-<xs:element name="rowNo" type="xs:int" minOccurs="0"/>
-<xs:element name="seatNo" type="xs:string" minOccurs="0"/>
-<xs:element name="status" type="xs:string" minOccurs="0"/>
-<xs:element name="ticket" type="tns:gdsTicket" minOccurs="0"/>
+<xs:element name="origin" type="xs:string" minOccurs="0"/>
+<xs:element name="dest" type="xs:string" minOccurs="0"/>
+<xs:element name="departDate" type="xs:dateTime" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="searchFlightResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
 </xs:sequence>
 </xs:complexType>
 
