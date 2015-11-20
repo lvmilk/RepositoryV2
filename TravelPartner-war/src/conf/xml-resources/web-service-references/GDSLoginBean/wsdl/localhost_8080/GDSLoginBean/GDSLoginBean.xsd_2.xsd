@@ -16,6 +16,14 @@
 
 <xs:element name="retrieveAccInfoResponse" type="tns:retrieveAccInfoResponse"/>
 
+<xs:element name="searchFlight" type="tns:searchFlight"/>
+
+<xs:element name="searchFlightResponse" type="tns:searchFlightResponse"/>
+
+<xs:element name="viewReleasedFlight" type="tns:viewReleasedFlight"/>
+
+<xs:element name="viewReleasedFlightResponse" type="tns:viewReleasedFlightResponse"/>
+
 <xs:complexType name="retrieveAccInfo">
 <xs:sequence>
 <xs:element name="gdsUserId" type="xs:string" minOccurs="0"/>
@@ -628,6 +636,106 @@
 <xs:complexType name="Exception">
 <xs:sequence>
 <xs:element name="message" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="viewReleasedFlight">
+<xs:sequence>
+<xs:element name="companyName" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="viewReleasedFlightResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:gdsFlight" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="gdsFlight">
+<xs:sequence>
+<xs:element name="arrAirport" type="xs:string" minOccurs="0"/>
+<xs:element name="arrIATA" type="xs:string" minOccurs="0"/>
+<xs:element name="arrTime" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="availableSeat" type="xs:int" minOccurs="0"/>
+<xs:element name="bookedSeat" type="xs:int" minOccurs="0"/>
+<xs:element name="cabinName" type="xs:string" minOccurs="0"/>
+<xs:element name="companyName" type="xs:string" minOccurs="0"/>
+<xs:element name="depAirport" type="xs:string" minOccurs="0"/>
+<xs:element name="depIATA" type="xs:string" minOccurs="0"/>
+<xs:element name="depTime" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="flightNo" type="xs:string" minOccurs="0"/>
+<xs:element name="flightStatus" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+<xs:element name="price" type="xs:double" minOccurs="0"/>
+<xs:element name="rsv" type="tns:gdsReservation" minOccurs="0"/>
+<xs:element name="seatQuota" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="gdsReservation">
+<xs:sequence>
+<xs:element name="airlineRsvCode" type="xs:long" minOccurs="0"/>
+<xs:element name="bkEmail" type="xs:string" minOccurs="0"/>
+<xs:element name="bkGivenName" type="xs:string" minOccurs="0"/>
+<xs:element name="bkSurname" type="xs:string" minOccurs="0"/>
+<xs:element name="gdsFlightList" type="tns:gdsFlight" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="pnr" type="tns:masterPNR" minOccurs="0"/>
+<xs:element name="rsvDate" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="status" type="xs:string" minOccurs="0"/>
+<xs:element name="tickets" type="tns:gdsTicket" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="totalPayment" type="xs:double" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="masterPNR">
+<xs:sequence>
+<xs:element name="GDSrsvList" type="tns:gdsReservation" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="gdsTicket">
+<xs:sequence>
+<xs:element name="arrCity" type="xs:string" minOccurs="0"/>
+<xs:element name="arrTime" type="xs:string" minOccurs="0"/>
+<xs:element name="bookDate" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="bookSystem" type="xs:string" minOccurs="0"/>
+<xs:element name="checkinStatus" type="xs:boolean"/>
+<xs:element name="depCity" type="xs:string" minOccurs="0"/>
+<xs:element name="depTime" type="xs:string" minOccurs="0"/>
+<xs:element name="flightNo" type="xs:string" minOccurs="0"/>
+<xs:element name="passenger" type="tns:gdsPassenger" minOccurs="0"/>
+<xs:element name="price" type="xs:double" minOccurs="0"/>
+<xs:element name="rsv" type="tns:gdsReservation" minOccurs="0"/>
+<xs:element name="seat" type="tns:seat" minOccurs="0"/>
+<xs:element name="ticketID" type="xs:long" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="gdsPassenger">
+<xs:sequence>
+<xs:element name="ffpName" type="xs:string" minOccurs="0"/>
+<xs:element name="ffpNo" type="xs:string" minOccurs="0"/>
+<xs:element name="givenName" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+<xs:element name="passport" type="xs:string" minOccurs="0"/>
+<xs:element name="surname" type="xs:string" minOccurs="0"/>
+<xs:element name="tickets" type="tns:gdsTicket" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="title" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="searchFlight">
+<xs:sequence>
+<xs:element name="origin" type="xs:string" minOccurs="0"/>
+<xs:element name="dest" type="xs:string" minOccurs="0"/>
+<xs:element name="departDate" type="xs:dateTime" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="searchFlightResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
 </xs:sequence>
 </xs:complexType>
 

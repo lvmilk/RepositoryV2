@@ -436,4 +436,5 @@ public class GDS_FlightReleaseManagedBean implements Serializable {
         this.columnEnd = columnEnd;
     }
 
+
 }
