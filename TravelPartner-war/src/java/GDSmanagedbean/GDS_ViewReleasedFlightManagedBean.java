@@ -15,6 +15,7 @@ import javax.inject.Named;
 import javax.xml.ws.WebServiceRef;
 import sessionbean.gds.GDSLoginBean_Service;
 import sessionbean.gds.GdsFlight;
+
 /**
  *
  * @author LI HAO
@@ -22,18 +23,18 @@ import sessionbean.gds.GdsFlight;
 @Named(value = "gdsVRF")
 @ViewScoped
 public class GDS_ViewReleasedFlightManagedBean implements Serializable {
+
     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/GDSLoginBean/GDSLoginBean.wsdl")
     private GDSLoginBean_Service service;
 
-    private List<GdsFlight> rlList= new ArrayList<GdsFlight>();
+    private List<GdsFlight> rlList = new ArrayList<GdsFlight>();
     private String companyName;
-    
-    
+
     @PostConstruct
     public void init() {
-        companyName=(String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("companyName");
+        companyName = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("companyName");
 
-           rlList=viewReleasedFlight(companyName);
+        rlList = viewReleasedFlight(companyName);
     }
 
     /**
