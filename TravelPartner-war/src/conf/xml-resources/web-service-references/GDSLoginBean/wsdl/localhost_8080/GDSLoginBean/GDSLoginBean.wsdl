@@ -13,6 +13,12 @@
 <message name="loginResponse">
 <part name="parameters" element="tns:loginResponse"/>
 </message>
+<message name="login">
+<part name="parameters" element="tns:login"/>
+</message>
+<message name="loginResponse">
+<part name="parameters" element="tns:loginResponse"/>
+</message>
 <message name="retrieveAccInfo">
 <part name="parameters" element="tns:retrieveAccInfo"/>
 </message>
@@ -21,18 +27,6 @@
 </message>
 <message name="Exception">
 <part name="fault" element="tns:Exception"/>
-</message>
-<message name="publishFlight">
-<part name="parameters" element="tns:publishFlight"/>
-</message>
-<message name="publishFlightResponse">
-<part name="parameters" element="tns:publishFlightResponse"/>
-</message>
-<message name="searchFlight">
-<part name="parameters" element="tns:searchFlight"/>
-</message>
-<message name="searchFlightResponse">
-<part name="parameters" element="tns:searchFlightResponse"/>
 </message>
 <message name="viewReleasedFlight">
 <part name="parameters" element="tns:viewReleasedFlight"/>
@@ -45,18 +39,14 @@
 <input wsam:Action="http://GDS.SessionBean/GDSLoginBean/loginRequest" message="tns:login"/>
 <output wsam:Action="http://GDS.SessionBean/GDSLoginBean/loginResponse" message="tns:loginResponse"/>
 </operation>
+<operation name="login">
+<input wsam:Action="http://GDS.SessionBean/GDSLoginBean/loginRequest" message="tns:login"/>
+<output wsam:Action="http://GDS.SessionBean/GDSLoginBean/loginResponse" message="tns:loginResponse"/>
+</operation>
 <operation name="retrieveAccInfo">
 <input wsam:Action="http://GDS.SessionBean/GDSLoginBean/retrieveAccInfoRequest" message="tns:retrieveAccInfo"/>
 <output wsam:Action="http://GDS.SessionBean/GDSLoginBean/retrieveAccInfoResponse" message="tns:retrieveAccInfoResponse"/>
 <fault message="tns:Exception" name="Exception" wsam:Action="http://GDS.SessionBean/GDSLoginBean/retrieveAccInfo/Fault/Exception"/>
-</operation>
-<operation name="publishFlight">
-<input wsam:Action="http://GDS.SessionBean/GDSLoginBean/publishFlightRequest" message="tns:publishFlight"/>
-<output wsam:Action="http://GDS.SessionBean/GDSLoginBean/publishFlightResponse" message="tns:publishFlightResponse"/>
-</operation>
-<operation name="searchFlight">
-<input wsam:Action="http://GDS.SessionBean/GDSLoginBean/searchFlightRequest" message="tns:searchFlight"/>
-<output wsam:Action="http://GDS.SessionBean/GDSLoginBean/searchFlightResponse" message="tns:searchFlightResponse"/>
 </operation>
 <operation name="viewReleasedFlight">
 <input wsam:Action="http://GDS.SessionBean/GDSLoginBean/viewReleasedFlightRequest" message="tns:viewReleasedFlight"/>
@@ -65,6 +55,15 @@
 </portType>
 <binding name="GDSLoginBeanPortBinding" type="tns:GDSLoginBean">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<operation name="publishFlight">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="login">
 <soap:operation soapAction=""/>
 <input>
@@ -85,24 +84,6 @@
 <fault name="Exception">
 <soap:fault name="Exception" use="literal"/>
 </fault>
-</operation>
-<operation name="publishFlight">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="searchFlight">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
 </operation>
 <operation name="viewReleasedFlight">
 <soap:operation soapAction=""/>
